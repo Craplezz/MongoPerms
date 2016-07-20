@@ -10,7 +10,6 @@ import net.md_5.bungee.api.event.PermissionCheckEvent;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
-import net.md_5.bungee.command.ConsoleCommandSender;
 import net.md_5.bungee.event.EventHandler;
 
 import java.io.File;
@@ -55,7 +54,7 @@ public class MongoPermsBungee extends Plugin implements Listener {
     @EventHandler
     public void onPermissionCheck(PermissionCheckEvent e) {
         CommandSender sender = e.getSender();
-        if (sender instanceof ConsoleCommandSender) {
+        if (!(sender instanceof ProxiedPlayer)) {
             e.setHasPermission(true);
         } else {
             ProxiedPlayer p = (ProxiedPlayer) e.getSender();
